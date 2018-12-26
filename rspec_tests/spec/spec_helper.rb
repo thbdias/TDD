@@ -16,9 +16,31 @@
 require_relative '../helpers/helper.rb'
 
 RSpec.configure do |config|
-  # Helper Methods de Módulo
 
+  # config.before(:suite) do
+  #   puts ">>>>>>>>>>>>>>>> antes de toda a suite de testes"
+  # end
+
+  # config.after(:suite) do
+  #   puts ">>>>>>>>>>>>>>>> depois de toda a suite de testes"
+  # end
+
+
+
+  # config.before(:context) do #por describe
+  #   puts ">>>>>>>>>>>>>>>> antes de todos os testes"
+  # end
+
+  # config.after(:all) do #por describe
+  #   puts ">>>>>>>>>>>>>>>> depois de todos os testes"
+  # end
+
+
+
+
+  # Helper Methods de Módulo
   config.include Helper
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
