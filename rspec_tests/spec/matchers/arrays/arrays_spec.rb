@@ -10,7 +10,7 @@ describe Array.new([1,2,3]), "Array de teste", type: 'collection' do #type: 'col
 
   it { expect(subject).to an_array_excluding(4) } #não deve conter o 4 
 
-  it '#contain_exactly' do
+  it '#contain_exactly', :slow do
     expect(subject).to contain_exactly(2,3,1)
   end
 
