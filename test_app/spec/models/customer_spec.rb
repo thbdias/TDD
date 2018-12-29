@@ -10,6 +10,11 @@ RSpec.describe Customer, type: :model do
     expect(customer.full_name).to eq("Sr. Thiago Dias")    
   end
   
+  it 'Herança' do    
+    customer = create(:customer_vip) 
+    expect(customer.days_to_pay).to eq(30)    
+  end
+  
   it '#full_name' do    
     # customer = create(:customer) #usando factory bot
     customer = create(:user) #usando aliases
