@@ -1,7 +1,7 @@
 FactoryBot.define do 
   factory :customer, aliases: [:user] do
-    name Faker::Name.name
-    email Faker::Internet.email
+    name { Faker::Name.name } # atributo dinamico - usar chaves
+    email { Faker::Internet.email } # atributo dinamico - usar chaves
 
     transient do
       upcased false
