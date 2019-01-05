@@ -4,13 +4,11 @@ FactoryBot.define do
     name { Faker::Name.name } # atributo dinamico - usar chaves
     #email { Faker::Internet.email } # atributo dinamico - usar chaves
 
-    # sequence (:email) {|n| "meu_email-#{n}@email.com"}
-    sequence (:email, 'a') { |n| "meu_email-#{n}@email.com" }
+    sequence (:email) {|n| "meu_email-#{n}@email.com"}
+    # sequence (:email, 'a') { |n| "meu_email-#{n}@email.com" } # dando erro 
     
-
-    name { Faker::Name.name }
-    email { Faker::Internet.email }
-
+    address { Faker::Address.street_address }
+    
 
     transient do
       upcased { false }
