@@ -1,17 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe CustomersController, type: :controller do
-    it 'responds successfully' do
-        get :index 
-        # puts response.inspect
-        #response contém a resposta que o servidor deu 
-        #relativo a requisição get a action index
-        expect(response).to be_success 
-        #be_success é um atalho ao comando have_http_status "200"
+
+    describe "as a Guest" do
+        context "#index" do
+            it 'responds successfully' do
+                get :index 
+                # puts response.inspect
+                #response contém a resposta que o servidor deu 
+                #relativo a requisição get a action index
+                #expect(response).to be_success 
+                expect(response).to be_successful
+                #be_success é um atalho ao comando have_http_status "200"
+            end
+            
+            it 'responds a 200 response' do
+                get :index         
+                expect(response).to have_http_status(200)    
+            end    
+        end                    
+        
+        it 'responds a 302 response (not authorized) ' do
+            customer = create(:customer)
+            get :show, params: { id: customer.id }
+            expect(response).to have_http_status(302)    
+        end    
     end
     
-    it 'responds a 200 response' do
-        get :index         
-        expect(response).to have_http_status(200)    
-    end    
+
+    describe "as Logged Member" do
+        it 'responds a 200 response' do
+            member = create(:member)
+            customer = create(:customer)
+    
+            sign_in member 
+    
+            get :show, params: { id: customer.id }
+            expect(response).to have_http_status(200)
+        end                
+        
+        it 'render a :show template' do
+            member = create(:member)
+            customer = create(:customer)
+    
+            sign_in member 
+    
+            get :show, params: { id: customer.id }
+            expect(response).to render_template(:show)
+        end        
+    end
 end
