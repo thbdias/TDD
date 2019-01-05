@@ -1,34 +1,47 @@
 FactoryBot.define do 
   factory :customer, aliases: [:user] do
+<<<<<<< HEAD
     name { Faker::Name.name } # atributo dinamico - usar chaves
     #email { Faker::Internet.email } # atributo dinamico - usar chaves
 
     # sequence (:email) {|n| "meu_email-#{n}@email.com"}
     sequence (:email, 'a') { |n| "meu_email-#{n}@email.com" }
     
+=======
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
+>>>>>>> 52f0e4bd194b844505c0effe71a7e34dac1c44b5
 
     transient do
-      upcased false
+      upcased { false }
+      qtt_orders { 3 }
     end
 
     trait :male do
-      gender 'M'
+      gender { 'M' }
     end
     
     trait :female do
-      gender 'F'
+      gender { 'F' }
     end
 
     trait :vip do
-      vip true
-      days_to_pay 30
+      vip { true }
+      days_to_pay { 30 }
     end
 
     trait :default do
-      vip false
-      days_to_pay 15
+      vip { false }
+      days_to_pay { 15 }
     end
 
+    trait :with_orders do
+      after(:create) do |customer, evaluator|
+        create_list(:order, evaluator.qtt_orders, customer: customer)
+      end
+    end
+
+    factory :customer_with_orders, traits: [:with_orders]
     factory :customer_male, traits: [:male]
     factory :customer_female, traits: [:female]
     factory :customer_vip, traits: [:vip]
