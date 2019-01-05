@@ -44,6 +44,7 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 4.0'
   gem 'faker'
   gem 'rubocop-rspec'
+  gem 'httparty'
 end
 
 group :development do
