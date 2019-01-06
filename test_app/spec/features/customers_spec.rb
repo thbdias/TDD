@@ -7,4 +7,23 @@ RSpec.feature "Customers", type: :feature do
     # print page.html
     expect(page).to have_current_path(customers_path)
   end
+
+  it 'Creates a Customer' do
+    #fazendo login
+    member = create(:member)
+    login_as(member, :scope => :member)
+
+    #entrando na página
+    visit(new_customer_path)
+
+    #preenchendo campos
+    fill_in('Name', with: Faker::Name.name)
+    fill_in('Email', with: Faker::Internet.email)
+    fill_in('Address', with: Faker::Address.street_address)
+
+    #clicar no botao
+    click_button('Create Customer')
+
+    expect(page).to have_content('Customer was successfully created.')
+  end
 end
