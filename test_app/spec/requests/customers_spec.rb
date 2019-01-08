@@ -2,6 +2,16 @@ require 'rails_helper'
 
 RSpec.describe "Customers", type: :request do
   describe "GET /customers" do
+
+    it 'JSON Schema' do
+      get '/customers/1.json' #fazendo requisição
+      #compara o response (que é um json),
+      #com um formato especificado em ../suport/api/schemas/customer.json,
+      #derivado da gem 'json_matchers'
+      p response.body
+      expect(response).to match_json_schema("customer")
+    end
+
     it "works! 200 OK" do
       get customers_path
       expect(response).to have_http_status(200)      
