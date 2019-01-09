@@ -81,7 +81,7 @@ feature "Customers", type: :feature do
 
 
 
-  it 'Atualiza um Cliente' do
+  scenario 'Atualiza um Cliente' do
     customer = Customer.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
@@ -99,7 +99,7 @@ feature "Customers", type: :feature do
     expect(page).to  have_content(new_name)
   end
 
-  it 'Clica no link Mostrar da Index' do
+  scenario 'Clica no link Mostrar da Index' do
     customer = Customer.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
@@ -113,7 +113,7 @@ feature "Customers", type: :feature do
     expect(page).to have_content("Mostrando Cliente")
   end
 
-  it 'Clica no link Editar da Index' do
+  scenario 'Clica no link Editar da Index' do
     customer = Customer.create!(
       name: Faker::Name.name,
       email: Faker::Internet.email,
@@ -126,6 +126,23 @@ feature "Customers", type: :feature do
     find(:xpath, "/html/body/table/tbody/tr[1]/td[3]/a").click
     expect(page).to have_content("Editando Cliente")
   end
+
+
+  # com erro a exclusão por causa do docker
+  # driver do browser
+  # configuração não feita e gems não instaladas
+  # scenario 'Apaga um cliente' do
+  #   customer = Customer.create!(
+  #     name: Faker::Name.name,
+  #     email: Faker::Internet.email,
+  #     phone: Faker::PhoneNumber.phone_number,
+  #     smoker: ['S', 'N'].sample,
+  #     avatar: "#{Rails.root}/spec/fixtures/avatar.png"
+  #   )
+
+  #   visit(customers_path)
+  #   page.driver.browser.switch_to.alert.accept
+  # end
 
 
 end
